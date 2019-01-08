@@ -9,7 +9,7 @@ If you don't understand what the script will do, don't run it
 
 # Rule #2 - Contributers
 
-Generalise your code. Don't include details specific to one environment, such as usernames, passwords or UNC paths.
+Generalise your code where-ever possible. Try not to include details specific to one environment, such as usernames, passwords or UNC paths. Where this is unavoidable, comment your code accordingly with a sufficiently visible warning.
 Where possible/practical use Classes & Functions to make reading code easier.
 
 Sensible variable, class and function naming is a must for changes to be approved.

@@ -117,3 +117,15 @@ Get-appxpackage -allusers *XboxOneSmartGlass* | Remove-AppxPackage
 Get-appxprovisionedpackage –online | where-object {$_.packagename –like "*XboxOneSmartGlass*"} | remove-appxprovisionedpackage –online
 Get-appxpackage -allusers *Microsoft.XboxSpeechToTextOverlay* | Remove-AppxPackage
 Get-AppxProvisionedPackage -Online | where-object {$_.PackageName -like "Microsoft.XboxSpeechToTextOverlay"} | remove-appxprovisionedpackage -online
+
+$list = { "Microsoft.Office", "Microsoft.MicrosoftOfficeHub", "*OneNote*", "*XboxApp*", "*xbox*","*Pandora*", "Microsoft.XboxSpeechToTextOverlay", "*XboxOneSmartGlass*", "*Microsoft3DViewer*",  "*Twitter*", "*Office.Sway*", "*SkypeApp*", "*SketchBook*", "*Royal*", "*3DBuilder*", "*Bing*", "*ConnectivityStore*", "*Microsoft.WindowsFeedbackHub*", "*MicrosoftSolitaireCollection*", "*Netflix*", "*Sway*", "*WindowsMaps*", "*Zune*", "*AdobeSystemsIncorporated.AdobePhotoshopExpress*", "*Asphalt*", "*CandyCrushSodaSaga*", "*Microsoft.Drawboard*", "*FarmVille2CountryEscape*" }
+
+ForEach ($app in $list) {
+    if (Get-AppxProvisionedPackage -Online | Where-Object {$_.PackageName -match $app -or $_.PackageName -like $app}) {
+        Remove-AppxProvisionedPackage -Online -PackageName $app.PackageName | Out-Null
+    }
+
+    if (Get-AppxPackage | Where-Object {$_.Name -match $app -or $_.PackageName -match $app -or $_.PackageName -like $app -or $_.Name -like $app }) {
+        Remove-AppxPackage -Package $app.PackageFullName | Out-Null
+    }
+}

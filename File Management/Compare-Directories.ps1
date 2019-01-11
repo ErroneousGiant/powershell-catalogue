@@ -1,3 +1,5 @@
+#Requires -Version 5
+
 $sourceArray = @()
 $copyArray = @()
 

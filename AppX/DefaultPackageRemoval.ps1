@@ -4,9 +4,9 @@ $apps = ("Microsoft.Office", "Microsoft.Getstarted", "Microsoft.OneConnect", "Mi
  
 ForEach ($app in $apps) {
     write-host $app
-    if (Get-AppxPackage $app) {
+    if (Get-AppxPackage | Where { $_.Name -like $app}) {
         try {
-            Get-AppxPackage $app | Remove-AppxPackage
+            Get-AppxPackage | Where { $_.Name -like $app} | Remove-AppxPackage
             Write-host $app was removed -ForegroundColor Green
         }
         catch [IOException] {
